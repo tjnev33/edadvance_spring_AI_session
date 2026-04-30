@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EdAdvance Spring AI PD — Participant Guide</title>
+<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+<script>window.tailwind = window.tailwind || { config: {} };</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "deep-teal": "#0F4C5C",
+          "warm-gold": "#E8A33D",
+          "cream": "#FBF7F0",
+          "muted-rose": "#C85250",
+          "slate-ink": "#1A2332"
+        },
+        fontFamily: { "mono": ["JetBrains Mono", "monospace"] },
+        borderWidth: { "3": "3px", "6": "6px", "10": "10px" }
+      }
+    }
+  }
+</script>
+<style>
+  /* Custom color palette — CSS variables so accents are tweakable at runtime */
+  :root {
+    --c-deep-teal: #0F4C5C;
+    --c-warm-gold: #E8A33D;
+    --c-muted-rose: #C85250;
+    --c-cream: #FBF7F0;
+    --c-slate-ink: #1A2332;
+  }
+  .bg-deep-teal { background-color: var(--c-deep-teal) !important; }
+  .text-deep-teal { color: var(--c-deep-teal) !important; }
+  .border-deep-teal { border-color: var(--c-deep-teal) !important; }
+  .bg-warm-gold { background-color: var(--c-warm-gold) !important; }
+  .text-warm-gold { color: var(--c-warm-gold) !important; }
+  .border-warm-gold { border-color: var(--c-warm-gold) !important; }
+  .bg-cream { background-color: var(--c-cream) !important; }
+  .text-cream { color: var(--c-cream) !important; }
+  .border-cream { border-color: var(--c-cream) !important; }
+  .bg-muted-rose { background-color: var(--c-muted-rose) !important; }
+  .text-muted-rose { color: var(--c-muted-rose) !important; }
+  .border-muted-rose { border-color: var(--c-muted-rose) !important; }
+  .bg-slate-ink { background-color: var(--c-slate-ink) !important; }
+  .text-slate-ink { color: var(--c-slate-ink) !important; }
+  .border-slate-ink { border-color: var(--c-slate-ink) !important; }
+  .hover\:bg-warm-gold:hover { background-color: var(--c-warm-gold) !important; }
+  .hover\:bg-slate-ink:hover { background-color: var(--c-slate-ink) !important; }
+  .hover\:bg-deep-teal:hover { background-color: var(--c-deep-teal) !important; }
+  .hover\:bg-muted-rose:hover { background-color: var(--c-muted-rose) !important; }
+  .hover\:bg-cream:hover { background-color: var(--c-cream) !important; }
+  .hover\:text-warm-gold:hover { color: var(--c-warm-gold) !important; }
+  .hover\:text-cream:hover { color: var(--c-cream) !important; }
+  .hover\:text-deep-teal:hover { color: var(--c-deep-teal) !important; }
+  .hover\:text-muted-rose:hover { color: var(--c-muted-rose) !important; }
+  .hover\:text-slate-ink:hover { color: var(--c-slate-ink) !important; }
+  .hover\:border-warm-gold:hover { border-color: var(--c-warm-gold) !important; }
+  .hover\:border-slate-ink:hover { border-color: var(--c-slate-ink) !important; }
+  .focus\:border-warm-gold:focus { border-color: var(--c-warm-gold) !important; }
+  .focus\:ring-warm-gold:focus { --tw-ring-color: var(--c-warm-gold) !important; }
+  .group:hover .group-hover\:bg-cream { background-color: var(--c-cream) !important; }
+  .group:hover .group-hover\:bg-warm-gold { background-color: var(--c-warm-gold) !important; }
+  .group:hover .group-hover\:text-deep-teal { color: var(--c-deep-teal) !important; }
+  .group:hover .group-hover\:text-warm-gold { color: var(--c-warm-gold) !important; }
+  .group:hover .group-hover\:text-cream { color: var(--c-cream) !important; }
+  .group[open] .group-open\:rotate-45 { transform: rotate(45deg); }
+  .selection\:bg-slate-ink ::selection { background-color: #1A2332; }
+  .selection\:text-cream ::selection { color: #FBF7F0; }
+  .border-3 { border-width: 3px !important; }
+  .border-6 { border-width: 6px !important; }
+  .border-10 { border-width: 10px !important; }
+  .border-r-3 { border-right-width: 3px !important; }
+  .border-l-3 { border-left-width: 3px !important; }
+  .border-t-3 { border-top-width: 3px !important; }
+  .border-b-3 { border-bottom-width: 3px !important; }
+  .border-t-6 { border-top-width: 6px !important; }
+  .border-b-6 { border-bottom-width: 6px !important; }
+  .border-t-10 { border-top-width: 10px !important; }
+  .border-b-10 { border-bottom-width: 10px !important; }
+  .divide-y-6 > :not([hidden]) ~ :not([hidden]) { border-top-width: 6px !important; }
+  .divide-y-3 > :not([hidden]) ~ :not([hidden]) { border-top-width: 3px !important; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace !important; }
+  body { font-family: 'JetBrains Mono', ui-monospace, monospace; background-color: #FBF7F0; color: #1A2332; cursor: crosshair; }
+  body ::selection { background-color: #1A2332; color: #FBF7F0; }
+</style>
+<style>
+  .brutal-shadow    { box-shadow: 8px 8px 0 0 rgba(26,35,50,1); }
+  .brutal-shadow-lg { box-shadow: 16px 16px 0 0 rgba(26,35,50,1); }
+  .brutal-shadow-sm { box-shadow: 4px 4px 0 0 rgba(26,35,50,1); }
+  .floating-card { transition: transform 0.15s ease, box-shadow 0.15s ease; box-shadow: 8px 8px 0 0 rgba(26,35,50,1); }
+  .floating-card:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 14px 14px 0 0 var(--c-warm-gold), 14px 14px 0 3px var(--c-slate-ink) !important;
+  }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  .marquee { animation: marquee 28s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  textarea:focus, input:focus { outline: 3px solid var(--c-warm-gold); outline-offset: 2px; }
+
+  /* Q-card interaction: gold tab slides in from the left + subtle slant */
+  .q-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .q-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    background-color: var(--c-warm-gold);
+    transition: width 0.2s ease;
+    z-index: 0;
+  }
+  .q-card > * { position: relative; z-index: 1; }
+  .q-card:hover {
+    transform: skewX(-2deg) translateY(-2px);
+    border-color: var(--c-warm-gold) !important;
+  }
+  .q-card:hover::before { width: 10px; }
+</style>
+<style type="text/tailwindcss">
+  @layer base {
+    body {
+      @apply bg-cream font-mono text-slate-ink selection:bg-slate-ink selection:text-cream;
+      cursor: crosshair;
+    }
+  }
+</style>
+</head>
+<body class="p-4 md:p-8">
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] w-[320px] hidden" style="font-family: 'JetBrains Mono', monospace;">
+  <!-- Collapsed tab (shown when minimized) -->
+  <button id="tw-toggle-open" class="hidden w-full bg-slate-ink text-cream border-3 border-slate-ink brutal-shadow-sm px-4 py-3 flex items-center justify-between hover:bg-warm-gold hover:text-slate-ink transition-colors">
+    <span class="flex items-center gap-2">
+      <span class="w-2 h-2 bg-warm-gold inline-block animate-pulse"></span>
+      <span class="text-[11px] font-black uppercase tracking-widest">CONTROL_PANEL</span>
+    </span>
+    <span class="material-symbols-outlined text-base">expand_less</span>
+  </button>
+
+  <!-- Expanded panel -->
+  <div id="tw-expanded" class="bg-cream border-3 border-slate-ink brutal-shadow" style="max-height: calc(100vh - 2rem); overflow-y: auto;">
+    <!-- Header strip -->
+    <div class="bg-slate-ink text-cream px-4 py-2 flex items-center justify-between border-b-3 border-slate-ink sticky top-0 z-10">
+      <span class="flex items-center gap-2">
+        <span id="tw-status-dot" class="w-2 h-2 bg-warm-gold inline-block animate-pulse"></span>
+        <span class="text-[11px] font-black uppercase tracking-widest">CONTROL_PANEL</span>
+      </span>
+      <div class="flex items-center gap-1">
+        <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-warm-gold">v2.1 · LIVE</span>
+        <button id="tw-toggle-close" class="ml-2 text-cream hover:text-warm-gold" aria-label="Minimize">
+          <span class="material-symbols-outlined text-base leading-none">remove</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Field coordinates / intro -->
+    <div class="px-4 py-2 bg-warm-gold border-b-3 border-slate-ink flex items-center justify-between">
+      <span class="text-[9px] font-black uppercase tracking-widest text-slate-ink">// TUNE_THE_SIGNAL</span>
+      <span class="text-[9px] font-bold uppercase tracking-widest text-slate-ink/60" id="tw-session">SESSION_01</span>
+    </div>
+
+    <div class="divide-y-3 divide-slate-ink">
+
+      <!-- HUE SHIFT -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ HUE_SHIFT ]</span>
+          <span id="tw-hue-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">0°</span>
+        </div>
+        <input id="tw-hue" type="range" min="0" max="360" step="1" value="0" class="w-full accent-slate-ink" />
+        <div class="mt-2 flex gap-1 h-4 border-2 border-slate-ink" id="tw-swatch">
+          <span class="flex-1" style="background: var(--c-warm-gold)"></span>
+          <span class="flex-1" style="background: var(--c-deep-teal)"></span>
+          <span class="flex-1" style="background: var(--c-muted-rose)"></span>
+        </div>
+      </div>
+
+      <!-- PALETTE WIDTH -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ PALETTE_WIDTH ]</span>
+          <span id="tw-count-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">3</span>
+        </div>
+        <div id="tw-count-btns" class="grid grid-cols-3 gap-1" role="tablist" aria-label="Palette width">
+          <button data-val="1" class="tw-seg text-[10px] font-black uppercase tracking-widest border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">MONO</button>
+          <button data-val="2" class="tw-seg text-[10px] font-black uppercase tracking-widest border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">DUO</button>
+          <button data-val="3" class="tw-seg text-[10px] font-black uppercase tracking-widest border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">TRIAD</button>
+        </div>
+        <input id="tw-count" type="hidden" value="3" />
+      </div>
+
+      <!-- TEXTURE -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ TEXTURE ]</span>
+          <span id="tw-texture-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">NONE</span>
+        </div>
+        <div id="tw-texture-btns" class="grid grid-cols-4 gap-1">
+          <button data-val="none" class="tw-tex text-[9px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">OFF</button>
+          <button data-val="grid" class="tw-tex text-[9px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">GRID</button>
+          <button data-val="dots" class="tw-tex text-[9px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">DOTS</button>
+          <button data-val="lines" class="tw-tex text-[9px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">LINES</button>
+        </div>
+      </div>
+
+      <!-- SHADOW DEPTH -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ SHADOW_DEPTH ]</span>
+          <span id="tw-shadow-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">8PX</span>
+        </div>
+        <input id="tw-shadow" type="range" min="0" max="20" step="1" value="8" class="w-full accent-slate-ink" />
+      </div>
+
+      <!-- TYPE INTENSITY -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ TYPE_VOLUME ]</span>
+          <span id="tw-type-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">LOUD</span>
+        </div>
+        <div id="tw-type-btns" class="grid grid-cols-3 gap-1">
+          <button data-val="quiet" class="tw-type text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold" style="letter-spacing: 0">QUIET</button>
+          <button data-val="loud" class="tw-type text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold" style="letter-spacing: -0.05em">LOUD</button>
+          <button data-val="shout" class="tw-type text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold" style="letter-spacing: -0.08em">SHOUT</button>
+        </div>
+      </div>
+
+      <!-- CURSOR -->
+      <div class="px-4 py-3">
+        <div class="flex justify-between items-baseline mb-2">
+          <span class="text-[10px] font-black uppercase tracking-widest">[ CURSOR ]</span>
+          <span id="tw-cursor-val" class="text-[10px] font-black text-slate-ink px-1.5 bg-cream border border-slate-ink">CROSS</span>
+        </div>
+        <div id="tw-cursor-btns" class="grid grid-cols-3 gap-1">
+          <button data-val="crosshair" class="tw-cursor text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">CROSS</button>
+          <button data-val="default" class="tw-cursor text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">ARROW</button>
+          <button data-val="cell" class="tw-cursor text-[10px] font-black uppercase border-2 border-slate-ink py-1.5 bg-cream hover:bg-warm-gold">CELL</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action row -->
+    <div class="bg-slate-ink px-4 py-3 grid grid-cols-2 gap-2 border-t-3 border-slate-ink">
+      <button id="tw-chaos" class="text-[10px] font-black uppercase tracking-widest bg-muted-rose text-cream border-2 border-cream py-2 hover:bg-warm-gold hover:text-slate-ink transition-colors flex items-center justify-center gap-1">
+        <span class="material-symbols-outlined text-sm leading-none">shuffle</span>
+        CHAOS
+      </button>
+      <button id="tw-reset" class="text-[10px] font-black uppercase tracking-widest bg-cream text-slate-ink border-2 border-cream py-2 hover:bg-warm-gold transition-colors flex items-center justify-center gap-1">
+        <span class="material-symbols-outlined text-sm leading-none">restart_alt</span>
+        RESET
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Tweaks segmented buttons — active state */
+  .tw-seg.active,
+  .tw-tex.active,
+  .tw-type.active,
+  .tw-cursor.active {
+    background-color: var(--c-slate-ink) !important;
+    color: var(--c-cream) !important;
+  }
+  /* Body texture overlays driven by data-texture attr */
+  body { position: relative; }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background-image: none;
+  }
+  html[data-texture="grid"] body::after {
+    opacity: 0.06;
+    background-image:
+      linear-gradient(to right, #1A2332 1px, transparent 1px),
+      linear-gradient(to bottom, #1A2332 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  html[data-texture="dots"] body::after {
+    opacity: 0.12;
+    background-image: radial-gradient(#1A2332 1px, transparent 1.2px);
+    background-size: 18px 18px;
+  }
+  html[data-texture="lines"] body::after {
+    opacity: 0.07;
+    background-image: repeating-linear-gradient(0deg, #1A2332 0 1px, transparent 1px 4px);
+  }
+  /* Brutal shadow depth driven by CSS var */
+  :root { --bs: 8px; }
+  .brutal-shadow    { box-shadow: var(--bs) var(--bs) 0 0 rgba(26,35,50,1) !important; }
+  .brutal-shadow-lg { box-shadow: calc(var(--bs) * 2) calc(var(--bs) * 2) 0 0 rgba(26,35,50,1) !important; }
+  .brutal-shadow-sm { box-shadow: calc(var(--bs) / 2) calc(var(--bs) / 2) 0 0 rgba(26,35,50,1) !important; }
+  .floating-card { box-shadow: var(--bs) var(--bs) 0 0 rgba(26,35,50,1) !important; }
+  /* Type volume — scales headline tracking globally */
+  html[data-type="quiet"] { --tw-tracking-h: 0; }
+  html[data-type="loud"]  { --tw-tracking-h: -0.04em; }
+  html[data-type="shout"] { --tw-tracking-h: -0.08em; }
+  html[data-type="shout"] h1, html[data-type="shout"] h2, html[data-type="shout"] .tracking-tighter { letter-spacing: -0.08em !important; }
+  html[data-type="quiet"] h1, html[data-type="quiet"] h2, html[data-type="quiet"] .tracking-tighter { letter-spacing: -0.01em !important; }
+  /* Cursor mode */
+  html[data-cursor="default"] body, html[data-cursor="default"] body * { cursor: default !important; }
+  html[data-cursor="crosshair"] body { cursor: crosshair; }
+  html[data-cursor="cell"] body, html[data-cursor="cell"] body * { cursor: cell !important; }
+  /* Range sliders — brutalist restyle */
+  #tweaks-panel input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    background: transparent;
+  }
+  #tweaks-panel input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: var(--c-cream);
+    border: 2px solid var(--c-slate-ink);
+  }
+  #tweaks-panel input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: var(--c-cream);
+    border: 2px solid var(--c-slate-ink);
+  }
+  #tweaks-panel input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--c-warm-gold);
+    border: 2px solid var(--c-slate-ink);
+    margin-top: -6px;
+    cursor: grab;
+  }
+  #tweaks-panel input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--c-warm-gold);
+    border: 2px solid var(--c-slate-ink);
+    cursor: grab;
+  }
+</style>
+
+<template id="__bundler_thumbnail" data-bg-color="#FBF7F0">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect x="200" y="180" width="800" height="440" fill="#0F4C5C" stroke="#1A2332" stroke-width="12"/>
+    <rect x="180" y="160" width="800" height="440" fill="#E8A33D" stroke="#1A2332" stroke-width="12"/>
+    <text x="580" y="410" font-family="monospace" font-weight="900" font-size="140" fill="#1A2332" text-anchor="middle">3D</text>
+  </svg>
+</template>
+
+<!-- FLOATING NAV (same pattern as original) -->
+<nav class="fixed top-4 right-4 md:top-8 md:right-8 z-50 flex flex-col items-end space-y-[-10px]">
+  <div class="bg-cream border-3 border-slate-ink p-3 md:p-4 brutal-shadow-sm transform -rotate-1">
+    <span class="font-extrabold text-[10px] md:text-xs uppercase tracking-tighter">[ NAV_SYSTEM ]</span>
+  </div>
+  <a class="bg-deep-teal text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink transition-all flex items-center gap-2 group transform rotate-2" href="#overview">
+    <span class="font-bold uppercase text-xs md:text-sm">Overview</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125 text-warm-gold">terminal</span>
+  </a>
+  <a class="bg-warm-gold text-slate-ink border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-cream transition-all flex items-center gap-2 group transform -rotate-1" href="#agenda">
+    <span class="font-bold uppercase text-xs md:text-sm">Agenda</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">list_alt</span>
+  </a>
+  <a class="bg-muted-rose text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-warm-gold transition-all flex items-center gap-2 group transform rotate-2" href="#context">
+    <span class="font-bold uppercase text-xs md:text-sm">Context</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">school</span>
+  </a>
+  <a class="bg-deep-teal text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-warm-gold transition-all flex items-center gap-2 group transform -rotate-2" href="#workflows">
+    <span class="font-bold uppercase text-xs md:text-sm">Three Workflows</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">account_tree</span>
+  </a>
+  <a class="bg-warm-gold text-slate-ink border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-cream transition-all flex items-center gap-2 group transform rotate-3" href="#protocol">
+    <span class="font-bold uppercase text-xs md:text-sm">3D Protocol</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">security</span>
+  </a>
+  <a class="bg-muted-rose text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-warm-gold transition-all flex items-center gap-2 group transform -rotate-1" href="#handson">
+    <span class="font-bold uppercase text-xs md:text-sm">Hands-On</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">rocket_launch</span>
+  </a>
+  <a class="bg-deep-teal text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-warm-gold transition-all flex items-center gap-2 group transform rotate-2" href="#debrief">
+    <span class="font-bold uppercase text-xs md:text-sm">Debrief &amp; Transfer</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125 text-warm-gold">forum</span>
+  </a>
+  <a class="bg-warm-gold text-slate-ink border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-cream transition-all flex items-center gap-2 group transform -rotate-2" href="#next-steps">
+    <span class="font-bold uppercase text-xs md:text-sm">Next Steps</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">route</span>
+  </a>
+  <a class="bg-muted-rose text-cream border-3 border-slate-ink p-2 md:p-3 brutal-shadow-sm hover:bg-slate-ink hover:text-warm-gold transition-all flex items-center gap-2 group transform rotate-1" href="#resources">
+    <span class="font-bold uppercase text-xs md:text-sm">Resources</span>
+    <span class="material-symbols-outlined text-base md:text-lg group-hover:scale-125">folder_open</span>
+  </a>
+</nav>
+
+<!-- HEADER -->
+<header id="overview" class="mb-16 mt-8 max-w-5xl">
+  <div class="inline-block bg-slate-ink px-4 py-1 mb-4 border-3 border-slate-ink text-xs font-bold uppercase tracking-widest text-warm-gold">
+    EDADVANCE_SPRING_2026 / PM_BREAKOUT_#2
+  </div>
+  <h1 class="text-5xl md:text-8xl xl:text-9xl font-extrabold uppercase leading-[0.85] tracking-tighter break-words border-b-6 border-slate-ink pb-8 text-deep-teal">
+    Empowering Student Researchers with NotebookLM
+  </h1>
+  <p class="mt-6 font-bold uppercase text-sm md:text-base max-w-3xl text-slate-ink leading-snug">
+    A 45-minute PD session for 9-12 educators. Move AI from generator → thinking partner. Deploy the DOCUMENT, DISCERN, DEFEND protocol inside real student research.
+  </p>
+</header>
+
+<!-- MAIN GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+
+  <!-- LEFT COLUMN -->
+  <div class="lg:col-span-8 space-y-24">
+
+    <!-- THE PROMISE -->
+    <section class="relative">
+      <div class="bg-warm-gold border-6 border-slate-ink p-8 brutal-shadow-lg relative z-10 text-slate-ink">
+        <h2 class="text-4xl font-extrabold mb-6 uppercase flex items-center gap-3">
+          <span class="material-symbols-outlined text-4xl text-deep-teal" style="font-variation-settings: 'FILL' 1, 'wght' 700;">emergency</span>
+          The Promise
+        </h2>
+        <p class="text-xl md:text-2xl font-bold leading-tight uppercase">
+          PARTICIPANTS WILL LEAVE WITH A TRANSFERABLE INSTRUCTIONAL MODEL FOR AI-SUPPORTED RESEARCH.
+          OBJECTIVE: EXPLORE THE <span class="bg-cream px-2 border-2 border-slate-ink italic text-deep-teal">DOCUMENT, DISCERN, DEFEND</span> PROTOCOL — AND USE NOTEBOOKLM AS A THINKING PARTNER AND RESEARCH ASSISTANT.
+        </p>
+        <div class="mt-8 pt-6 border-t-3 border-slate-ink/40">
+          <p class="text-xs md:text-sm font-bold italic normal-case leading-snug">
+            "Today is not about using AI to do research for students. It is about using AI to help students become more organized, more reflective, and more accountable researchers."
+          </p>
+        </div>
+      </div>
+      <div class="absolute -top-4 -left-4 w-full h-full border-3 border-slate-ink pointer-events-none opacity-20"></div>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda">
+      <div class="bg-deep-teal p-4 inline-block mb-8 transform -rotate-1 brutal-shadow-sm">
+        <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-cream">AGENDA</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-3 border-slate-ink bg-slate-ink">
+
+        <div class="bg-cream p-8 border-r-0 md:border-r-3 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Welcome & Overview</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">Introductions from the facilitators. Quick walk-through of the participant guide and how to use it during the session.</p>
+        </div>
+
+        <div class="bg-cream p-8 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Classroom Context</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">Evolve, don't reinvent · Cognitive work first · AI as validator · Grounded in a real classroom.</p>
+        </div>
+
+        <div class="bg-cream p-8 border-r-0 md:border-r-3 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Three Workflows</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">Targeted Inquiry · Alignment Check · Peer Review Crosswalk. Real student moves, briskly surfaced.</p>
+        </div>
+
+        <div class="bg-cream p-8 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">3D Protocol</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">DOCUMENT · DISCERN · DEFEND — how AI use becomes part of learning instead of a shortcut.</p>
+        </div>
+
+        <div class="bg-cream p-8 border-r-0 md:border-r-3 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Hands-On</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">Mini Alignment Check. Sample outline + draft + paste-ready prompt. You are the student.</p>
+        </div>
+
+        <div class="bg-cream p-8 border-b-3 border-slate-ink hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Debrief & Transfer</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">What was useful? Where did human judgment matter? How does this scale across grade bands?</p>
+        </div>
+
+        <div class="bg-cream p-8 md:col-span-2 hover:bg-warm-gold transition-colors cursor-help group">
+          <h3 class="text-2xl font-extrabold uppercase group-hover:underline text-deep-teal">Next Steps &amp; Close</h3>
+          <p class="mt-4 text-sm font-bold uppercase leading-snug text-slate-ink">The tool matters less than the instructional design. Guide navigation + Q&amp;A. End of transmission.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASSROOM CONTEXT -->
+    <section id="context" class="mt-24" data-screen-label="Classroom Context">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <div class="bg-warm-gold p-4 inline-block transform -rotate-1 brutal-shadow-sm border-3 border-slate-ink">
+          <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-slate-ink">CLASSROOM_CONTEXT / KELLY'S_CAPSTONE</h2>
+        </div>
+        <!-- Mode toggle -->
+        <div class="flex items-stretch border-3 border-slate-ink brutal-shadow-sm bg-cream" role="tablist" aria-label="View mode">
+          <button id="ctx-mode-carousel" class="ctx-mode-btn px-4 py-2 text-[10px] md:text-xs font-black uppercase tracking-widest border-r-3 border-slate-ink flex items-center gap-2" aria-pressed="true">
+            <span class="material-symbols-outlined text-base leading-none">view_carousel</span>
+            CAROUSEL
+          </button>
+          <button id="ctx-mode-doc" class="ctx-mode-btn px-4 py-2 text-[10px] md:text-xs font-black uppercase tracking-widest flex items-center gap-2" aria-pressed="false">
+            <span class="material-symbols-outlined text-base leading-none">article</span>
+            VIEW_AS_DOC
+          </button>
+        </div>
+      </div>
+
+      <!-- Field-setting framing strip (shared by both modes) -->
+      <div class="bg-deep-teal text-cream border-3 border-slate-ink brutal-shadow p-5 mb-6 flex flex-wrap items-center gap-4">
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-warm-gold border border-warm-gold px-2 py-1 shrink-0">[ FIELD_SETTING ]</span>
+        <p class="text-sm md:text-base font-bold uppercase leading-snug flex-1 min-w-[280px]">
+          A veteran teacher's deliberate first step. AI is changing the research process — Kelly chose a purposeful, manageable shift, not a reinvention.
+        </p>
+        <span class="hidden md:inline text-[10px] font-black uppercase tracking-widest text-cream/60 border-l-2 border-cream/30 pl-4">CAPSTONE_BRIEF · 03_FRAMES</span>
+      </div>
+
+      <!-- ==================== CAROUSEL MODE ==================== -->
+      <div id="ctx-carousel" class="bg-cream border-6 border-slate-ink brutal-shadow-lg overflow-hidden">
+        <!-- Carousel header bar -->
+        <div class="bg-slate-ink text-cream px-5 py-3 flex items-center justify-between border-b-6 border-slate-ink">
+          <div class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-warm-gold inline-block animate-pulse"></span>
+            <span class="text-[11px] md:text-xs font-black uppercase tracking-widest">DIRECT_INSTRUCTION_MODE</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="ctx-counter" class="text-[10px] md:text-xs font-black uppercase tracking-widest text-warm-gold">01 / 03</span>
+          </div>
+        </div>
+
+        <!-- Slide stage -->
+        <div id="ctx-stage" class="relative">
+
+          <!-- SLIDE 01 — CHALLENGE -->
+          <article class="ctx-slide p-6 md:p-10" data-slide="0">
+            <div class="grid grid-cols-1 gap-8">
+              <!-- Left: chapter + headline -->
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 mb-5">
+                  <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">01 / CHALLENGE</span>
+                  <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ THE_PROBLEM_KELLY_FACED ]</span>
+                </div>
+                <h3 class="text-3xl md:text-5xl font-extrabold uppercase leading-[0.95] tracking-tighter text-deep-teal">
+                  Thoughtful, manageable AI integration —<br/><span class="bg-warm-gold px-2 text-slate-ink">without reinventing the unit.</span>
+                </h3>
+                <p class="mt-5 text-sm md:text-base font-bold uppercase leading-snug text-slate-ink/80 max-w-xl">
+                  Kelly's senior research capstone already worked. The question was how to introduce AI without throwing the whole assignment out — and without pretending students wouldn't reach for it anyway.
+                </p>
+
+                <!-- Supporting deck -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_01 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Evolve, don't reinvent.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Keep the rigor of an existing capstone. Layer AI moves into proven structure.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_02 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Manageable scope.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Three workflows, not thirty. One semester. One teacher's energy budget.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_03 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Real classroom stakes.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Not a sandbox. Real grades, real research, real students who already use AI.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SLIDE 02 — APPROACH -->
+          <article class="ctx-slide p-6 md:p-10 hidden" data-slide="1">
+            <div class="grid grid-cols-1 gap-8">
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 mb-5">
+                  <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">02 / APPROACH</span>
+                  <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ HOW_SHE_FRAMED_AI ]</span>
+                </div>
+                <h3 class="text-3xl md:text-5xl font-extrabold uppercase leading-[0.95] tracking-tighter text-deep-teal">
+                  AI as a <span class="bg-warm-gold px-2 text-slate-ink">critical thinking partner</span> —<br/>not a shortcut, not a search bar.
+                </h3>
+                <p class="mt-5 text-sm md:text-base font-bold uppercase leading-snug text-slate-ink/80 max-w-xl">
+                  Students do the cognitive work first. AI shows up later — to validate, audit, or extend a position the student has already staked out.
+                </p>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_01 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Cognitive work first.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Students think, draft, and decide before any prompt is typed.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_02 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">AI as validator.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">The model checks the student's reasoning — it doesn't generate it.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_03 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Audit &amp; extend.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Find what's missing, what's unsupported, what could go further.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SLIDE 03 — TAKEAWAY -->
+          <article class="ctx-slide p-6 md:p-10 hidden" data-slide="2">
+            <div class="grid grid-cols-1 gap-8">
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 mb-5">
+                  <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">03 / TAKEAWAY</span>
+                  <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ WHAT_YOU_CARRY_HOME ]</span>
+                </div>
+                <h3 class="text-3xl md:text-5xl font-extrabold uppercase leading-[0.95] tracking-tighter text-deep-teal">
+                  A clear model<br/>you can <span class="bg-warm-gold px-2 text-slate-ink">carry home Monday.</span>
+                </h3>
+                <p class="mt-5 text-sm md:text-base font-bold uppercase leading-snug text-slate-ink/80 max-w-xl">
+                  You don't need a new curriculum. You need three named moves and a protocol for how students account for what AI did. That's portable.
+                </p>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-warm-gold mb-1" style="color: var(--c-deep-teal);">[ TAKEAWAY_01 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Academic integrity.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Documented use replaces guessing-and-policing. Trust gets a paper trail.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ TAKEAWAY_02 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Student metacognition.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">Discerning &amp; defending forces students to articulate their thinking out loud.</p>
+                  </div>
+                  <div class="border-3 border-slate-ink p-4 bg-cream">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ TAKEAWAY_03 ]</div>
+                    <p class="text-sm font-extrabold uppercase leading-tight text-slate-ink">Honest friction.</p>
+                    <p class="mt-2 text-xs font-bold uppercase leading-snug text-slate-ink/70">AI use stays slow enough to think — fast enough to feel useful.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Carousel footer: nav + pips -->
+        <div class="bg-slate-ink text-cream border-t-6 border-slate-ink p-4 flex items-center justify-between gap-4">
+          <button id="ctx-prev" class="bg-cream text-slate-ink border-3 border-slate-ink brutal-shadow-sm px-4 py-2 hover:bg-warm-gold transition-colors flex items-center gap-2 font-black uppercase text-xs tracking-widest" aria-label="Previous slide">
+            <span class="material-symbols-outlined text-base leading-none">arrow_back</span>
+            PREV
+          </button>
+
+          <div class="flex items-center gap-3">
+            <button class="ctx-pip group flex flex-col items-center gap-1" data-pip="0" aria-label="Go to slide 1">
+              <span class="block w-10 md:w-14 h-1.5 bg-cream/30 group-[.active]:bg-warm-gold transition-colors"></span>
+              <span class="text-[9px] font-black uppercase tracking-widest text-cream/40 group-[.active]:text-warm-gold">CHAL</span>
+            </button>
+            <button class="ctx-pip group flex flex-col items-center gap-1" data-pip="1" aria-label="Go to slide 2">
+              <span class="block w-10 md:w-14 h-1.5 bg-cream/30 group-[.active]:bg-warm-gold transition-colors"></span>
+              <span class="text-[9px] font-black uppercase tracking-widest text-cream/40 group-[.active]:text-warm-gold">APPR</span>
+            </button>
+            <button class="ctx-pip group flex flex-col items-center gap-1" data-pip="2" aria-label="Go to slide 3">
+              <span class="block w-10 md:w-14 h-1.5 bg-cream/30 group-[.active]:bg-warm-gold transition-colors"></span>
+              <span class="text-[9px] font-black uppercase tracking-widest text-cream/40 group-[.active]:text-warm-gold">TAKE</span>
+            </button>
+          </div>
+
+          <button id="ctx-next" class="bg-warm-gold text-slate-ink border-3 border-slate-ink brutal-shadow-sm px-4 py-2 hover:bg-cream transition-colors flex items-center gap-2 font-black uppercase text-xs tracking-widest" aria-label="Next slide">
+            NEXT
+            <span class="material-symbols-outlined text-base leading-none">arrow_forward</span>
+          </button>
+        </div>
+
+        <!-- Keyboard hint -->
+        <div class="bg-cream border-t-3 border-slate-ink px-4 py-2 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-ink/60">
+          <span>← / → · ARROW_KEYS_NAV</span>
+          <span>ESC · NOT_REQUIRED</span>
+          <span class="hidden md:inline">DIRECT_INSTRUCTION · KELLY_DRIVES</span>
+        </div>
+      </div>
+
+      <!-- ==================== DOC MODE ==================== -->
+      <div id="ctx-doc" class="hidden space-y-6">
+        <article class="bg-cream border-3 border-slate-ink brutal-shadow p-6 md:p-8">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">01 / CHALLENGE</span>
+            <h3 class="text-xl md:text-2xl font-extrabold uppercase text-deep-teal">Thoughtful, manageable AI integration.</h3>
+          </div>
+          <p class="text-sm font-bold uppercase leading-relaxed text-slate-ink/80 mb-4">
+            Kelly's senior research capstone already worked. The question was how to introduce AI without throwing the whole assignment out — and without pretending students wouldn't reach for it anyway.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_01 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Evolve, don't reinvent — keep proven structure.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_02 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Manageable scope — three workflows, one semester.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-muted-rose mb-1">[ TENSION_03 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Real stakes — real grades, real research, real students.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-cream border-3 border-slate-ink brutal-shadow p-6 md:p-8">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">02 / APPROACH</span>
+            <h3 class="text-xl md:text-2xl font-extrabold uppercase text-deep-teal">AI as a critical thinking partner.</h3>
+          </div>
+          <p class="text-sm font-bold uppercase leading-relaxed text-slate-ink/80 mb-4">
+            Students do the cognitive work first. AI shows up later — to validate, audit, or extend a position the student has already staked out.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_01 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Cognitive work first — student thinks before prompting.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_02 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">AI as validator — model checks reasoning, doesn't generate it.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ MOVE_03 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug"><span class="bg-warm-gold px-1 text-slate-ink">Audit &amp; extend</span> — find what's missing or unsupported.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-cream border-3 border-slate-ink brutal-shadow p-6 md:p-8">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">03 / TAKEAWAY</span>
+            <h3 class="text-xl md:text-2xl font-extrabold uppercase text-deep-teal">A clear model you can carry home.</h3>
+          </div>
+          <p class="text-sm font-bold uppercase leading-relaxed text-slate-ink/80 mb-4">
+            You don't need a new curriculum. You need three named moves and a protocol for how students account for what AI did. That's portable.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ TAKEAWAY_01 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Academic integrity — documented use replaces policing.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ TAKEAWAY_02 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Student metacognition — discern &amp; defend out loud.</p>
+            </div>
+            <div class="border-2 border-slate-ink p-3">
+              <div class="text-[10px] font-black uppercase tracking-widest text-deep-teal mb-1">[ TAKEAWAY_03 ]</div>
+              <p class="text-xs font-bold uppercase leading-snug">Honest friction — slow enough to think, fast enough to use.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <style>
+      /* Mode toggle active state */
+      .ctx-mode-btn { background-color: var(--c-cream); color: var(--c-slate-ink); }
+      .ctx-mode-btn[aria-pressed="true"] { background-color: var(--c-slate-ink); color: var(--c-warm-gold); }
+      .ctx-mode-btn:hover:not([aria-pressed="true"]) { background-color: var(--c-warm-gold); }
+      /* Slide transition */
+      .ctx-slide { animation: ctxFadeIn 0.25s ease; }
+      @keyframes ctxFadeIn {
+        from { opacity: 0; transform: translateX(12px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+    </style>
+
+    <script>
+      (function () {
+        const carousel = document.getElementById('ctx-carousel');
+        const docView  = document.getElementById('ctx-doc');
+        const modeC    = document.getElementById('ctx-mode-carousel');
+        const modeD    = document.getElementById('ctx-mode-doc');
+        const slides   = document.querySelectorAll('.ctx-slide');
+        const pips     = document.querySelectorAll('.ctx-pip');
+        const counter  = document.getElementById('ctx-counter');
+        const prevBtn  = document.getElementById('ctx-prev');
+        const nextBtn  = document.getElementById('ctx-next');
+        const stage    = document.getElementById('ctx-stage');
+
+        let idx = 0;
+        const total = slides.length;
+
+        function render() {
+          slides.forEach((s, i) => s.classList.toggle('hidden', i !== idx));
+          pips.forEach((p, i) => p.classList.toggle('active', i === idx));
+          counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+          // Re-trigger fade
+          const active = slides[idx];
+          active.style.animation = 'none';
+          // eslint-disable-next-line no-unused-expressions
+          active.offsetHeight;
+          active.style.animation = '';
+        }
+
+        function go(n) { idx = (n + total) % total; render(); }
+
+        prevBtn.addEventListener('click', () => go(idx - 1));
+        nextBtn.addEventListener('click', () => go(idx + 1));
+        pips.forEach(p => p.addEventListener('click', () => go(+p.dataset.pip)));
+
+        // Keyboard nav — only when carousel is in view AND focus isn't in a textarea/input
+        document.addEventListener('keydown', (e) => {
+          if (carousel.classList.contains('hidden')) return;
+          const tag = (document.activeElement && document.activeElement.tagName) || '';
+          if (tag === 'TEXTAREA' || tag === 'INPUT') return;
+          const rect = carousel.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!inView) return;
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+          if (e.key === 'ArrowLeft')  { e.preventDefault(); go(idx - 1); }
+        });
+
+        // Mode toggle
+        function setMode(mode) {
+          const isCarousel = mode === 'carousel';
+          carousel.classList.toggle('hidden', !isCarousel);
+          docView.classList.toggle('hidden', isCarousel);
+          modeC.setAttribute('aria-pressed', String(isCarousel));
+          modeD.setAttribute('aria-pressed', String(!isCarousel));
+        }
+        modeC.addEventListener('click', () => setMode('carousel'));
+        modeD.addEventListener('click', () => setMode('doc'));
+
+        render();
+      })();
+    </script>
+
+    <!-- WORKFLOWS -->
+    <section id="workflows">
+      <div class="bg-muted-rose p-4 inline-block mb-8 transform rotate-1 brutal-shadow-sm">
+        <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-cream">WORKFLOWS / 03_SNAPSHOTS</h2>
+      </div>
+
+      <div class="space-y-8">
+
+        <!-- Workflow 01 · Peer Review Crosswalk -->
+        <details class="bg-cream border-6 border-slate-ink brutal-shadow group">
+          <summary class="p-6 flex items-start gap-4 bg-warm-gold border-b-6 border-slate-ink">
+            <span class="bg-slate-ink text-cream text-3xl font-black w-14 h-14 flex items-center justify-center shrink-0 border-3 border-slate-ink">01</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-extrabold uppercase text-slate-ink leading-tight">Peer Review Crosswalk</h3>
+              <p class="text-xs md:text-sm font-bold uppercase mt-1 text-slate-ink/70">Feedback visible · analyzable · less superficial</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink text-3xl group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHAT_STUDENTS_DID ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Used AI to examine peer feedback and determine whether revisions actually reflected that feedback — rather than assuming revision = response.</p>
+            </div>
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHY_IT_MATTERS ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Peer feedback becomes analyzable. Students stay responsible for final decisions.</p>
+            </div>
+            <div class="md:col-span-2 bg-slate-ink text-cream border-3 border-slate-ink">
+              <div class="bg-warm-gold text-slate-ink px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-b-3 border-slate-ink">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base">terminal</span>
+                  <span class="font-black uppercase tracking-widest text-[11px]">[ ACTUAL_STUDENT_PROMPT / PASTE_READY ]</span>
+                </div>
+                <button onclick="copyPre(this)" class="bg-slate-ink text-warm-gold border-2 border-slate-ink px-3 py-1 hover:bg-cream hover:text-slate-ink transition-colors font-black uppercase text-[10px] tracking-widest">COPY ⧉</button>
+              </div>
+<pre class="p-5 text-[11px] md:text-[12px] leading-relaxed whitespace-pre-wrap font-mono">Role: Act as a Research Integrity Manager.
+
+Context:
+  • Revised Outline: I have updated my outline based on feedback from my peers. They focused mostly on clarity, flow, and structure.
+  • Aligning Research Evidence: This is your previous analysis where you identified key connections from my Sketchnotes and Flash Draft that were missing from my original outline.
+
+Task: I need you to crosswalk my Revised Outline against the Aligning Research Evidence document. I want to see if the changes I made for my peers inadvertently caused me to lose important research details, or if their feedback actually helped me solve the gaps you identified.
+
+Please provide an "Evidence vs. Structure" Report covering the following:
+
+1. The "Did I Delete Too Much?" Check
+   Compare the Revised Outline against the "Lost Connections" and "Gap Analysis" listed in the Aligning Research Evidence document.
+   Question: In my attempt to satisfy my peers (by cutting or rearranging text), did I accidentally remove any key evidence or concepts you previously flagged as essential?
+   Output: List any specific concepts from the Aligning Research Evidence that are still missing or were deleted in this revision.
+
+2. Convergence Analysis
+   Look at the "Structural Recommendations" you gave in the Aligning Research Evidence document.
+   Question: Did the peer feedback lead me to similar solutions as your AI feedback, even though they didn't see your notes?
+   Output: Highlight areas where the Revised Outline now satisfies your previous requirements (e.g., "Your peers helped you fix the gap regarding [Topic X], which aligns with my previous recommendation").
+
+3. Final Reconciliation Plan
+   If there is a conflict between what my peers wanted (clarity/brevity) and what the evidence suggests (detail/nuance), propose a compromise.
+   Example: "Your peers asked you to cut Section II for length, but that contained the link from your Sketchnotes. Instead of cutting it completely, try merging it into Section III as a single bullet point."</pre>
+            </div>
+          </div>
+        </details>
+
+        <!-- Workflow 02 -->
+        <details class="bg-cream border-6 border-slate-ink brutal-shadow group">
+          <summary class="p-6 flex items-start gap-4 bg-deep-teal border-b-6 border-slate-ink">
+            <span class="bg-cream text-deep-teal text-3xl font-black w-14 h-14 flex items-center justify-center shrink-0 border-3 border-slate-ink">02</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-extrabold uppercase text-cream leading-tight">Alignment Check</h3>
+              <p class="text-xs md:text-sm font-bold uppercase mt-1 text-cream/70">Audit the draft against the outline</p>
+            </div>
+            <span class="material-symbols-outlined text-cream text-3xl group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHAT_STUDENTS_DID ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Compared draft writing to their approved outline to catch scope creep, drift, or missing elements — before a teacher had to flag them.</p>
+            </div>
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHY_IT_MATTERS ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Builds metacognition. Students learn to see their own writing structurally.</p>
+            </div>
+            <div class="md:col-span-2 bg-slate-ink text-cream border-3 border-slate-ink">
+              <div class="bg-warm-gold text-slate-ink px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-b-3 border-slate-ink">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base">terminal</span>
+                  <span class="font-black uppercase tracking-widest text-[11px]">[ ACTUAL_STUDENT_PROMPT / PASTE_READY ]</span>
+                </div>
+                <button onclick="copyPre(this)" class="bg-slate-ink text-warm-gold border-2 border-slate-ink px-3 py-1 hover:bg-cream hover:text-slate-ink transition-colors font-black uppercase text-[10px] tracking-widest">COPY ⧉</button>
+              </div>
+<pre class="p-5 text-[11px] md:text-[12px] leading-relaxed whitespace-pre-wrap font-mono">Role: Act as an expert Research Writing Coach and Editor.
+
+Context: I have uploaded three documents representing different stages of my research process:
+  • Sketchnotes: My visual research notes where I mapped out concepts and connections.
+  • Flash Draft: A "brain dump" or free-write where I synthesized my research quickly.
+  • Preliminary Outline: The structured plan for my final research paper.
+
+Task: Please "crosswalk" (cross-reference) these three sources to evaluate the quality and completeness of my Preliminary Outline. I need you to identify what has been lost or gained in the translation from visual notes to rough text to structure.
+
+Please analyze the sources and provide feedback in the following format:
+
+1. The "Lost Connections" Check
+   Look at the Sketchnotes. Are there complex relationships, arrows, or conceptual links drawn there that appeared in the Flash Draft but are missing from the Preliminary Outline?
+   Goal: Ensure the nuance of my visual mapping isn't lost in the linear structure of the outline.
+
+2. Argument Alignment
+   Compare the Flash Draft to the Preliminary Outline. Does the outline preserve the strongest voice and central argument found in the flash draft, or has the focus shifted?
+   Goal: Ensure the passion or core thesis of the "brain dump" is preserved in the formal structure.
+
+3. Gap Analysis
+   Identify any key themes or evidence present in the Sketchnotes or Flash Draft that are completely absent from the Preliminary Outline.
+   Goal: Make sure I haven't accidentally discarded important research.
+
+4. Structural Recommendations
+   Based on the cross-reference, provide 3-5 specific, actionable steps to improve the Preliminary Outline. (e.g., "Add a subsection in Part II to address the connection between X and Y found in your Sketchnotes.")</pre>
+            </div>
+          </div>
+        </details>
+
+        <!-- Workflow 03 · Targeted Inquiry -->
+        <details class="bg-cream border-6 border-slate-ink brutal-shadow group">
+          <summary class="p-6 flex items-start gap-4 bg-muted-rose border-b-6 border-slate-ink">
+            <span class="bg-cream text-muted-rose text-3xl font-black w-14 h-14 flex items-center justify-center shrink-0 border-3 border-slate-ink">03</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-extrabold uppercase text-cream leading-tight">Targeted Inquiry</h3>
+              <p class="text-xs md:text-sm font-bold uppercase mt-1 text-cream/80">Passive browsing → purposeful source-seeking</p>
+            </div>
+            <span class="material-symbols-outlined text-cream text-3xl group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHAT_STUDENTS_DID ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Used NotebookLM research features to identify gaps in their source pool and hunt stronger, more specific evidence — instead of broad web searching.</p>
+            </div>
+            <div>
+              <div class="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">[ WHY_IT_MATTERS ]</div>
+              <p class="text-sm font-bold uppercase leading-snug">Research becomes question-driven. Students articulate what's missing BEFORE they look.</p>
+            </div>
+            <div class="md:col-span-2 bg-slate-ink text-cream p-5 border-3 border-slate-ink relative">
+              <div class="text-[10px] font-black uppercase tracking-widest text-warm-gold mb-3 flex justify-between">
+                <span>[ NO_SAMPLE_PROMPT · STUDENT_DRIVEN ]</span>
+                <span class="text-cream/40 text-[9px]">N/A</span>
+              </div>
+              <p class="text-xs md:text-sm leading-relaxed font-bold">There is no canned prompt for this move. Each student had already identified a topic adjacent to their research that they hadn't yet explored. The purpose of Targeted Inquiry is to use NotebookLM to find sources that could fill that specific gap in their knowledge — so the prompt is the student's own question, in their own words.</p>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- 3D PROTOCOL -->
+    <section id="protocol" class="bg-cream border-6 border-slate-ink brutal-shadow-lg overflow-hidden">
+      <div class="bg-deep-teal p-4 flex justify-between items-center text-cream">
+        <h2 class="text-3xl font-extrabold uppercase tracking-tighter">3D PROTOCOL / DOCUMENT · DISCERN · DEFEND</h2>
+        <span class="material-symbols-outlined text-4xl text-warm-gold" style="font-variation-settings: 'FILL' 1, 'wght' 900;">encrypted</span>
+      </div>
+      <div class="divide-y-6 divide-slate-ink">
+
+        <div class="p-8 hover:bg-warm-gold transition-colors group">
+          <div class="flex items-start gap-4">
+            <span class="bg-slate-ink text-cream text-4xl font-black w-16 h-16 flex items-center justify-center shrink-0 border-3 border-slate-ink group-hover:bg-cream group-hover:text-deep-teal">01</span>
+            <div>
+              <h3 class="text-3xl font-extrabold uppercase mb-2 text-deep-teal">DOCUMENT</h3>
+              <p class="font-bold uppercase text-lg text-slate-ink mb-4">Leave a paper trail. Students record the tool, the prompt, the purpose, and the output they used. Visibility into process, not compliance theater.</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">I used ___ to help me ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">The prompt I gave was ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">The output I used was ___.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 hover:bg-warm-gold transition-colors group">
+          <div class="flex items-start gap-4">
+            <span class="bg-slate-ink text-cream text-4xl font-black w-16 h-16 flex items-center justify-center shrink-0 border-3 border-slate-ink group-hover:bg-cream group-hover:text-deep-teal">02</span>
+            <div>
+              <h3 class="text-3xl font-extrabold uppercase mb-2 text-deep-teal">DISCERN</h3>
+              <p class="font-bold uppercase text-lg text-slate-ink mb-4">Weaponized skepticism. Students verify accuracy, check whether output is grounded in the actual source or draft, and decide if the recommendation makes sense for the task. No outsourced judgment.</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">One claim I verified: ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">What the AI got wrong: ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">This makes / doesn't make sense because ___.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 hover:bg-warm-gold transition-colors group">
+          <div class="flex items-start gap-4">
+            <span class="bg-slate-ink text-cream text-4xl font-black w-16 h-16 flex items-center justify-center shrink-0 border-3 border-slate-ink group-hover:bg-cream group-hover:text-deep-teal">03</span>
+            <div>
+              <h3 class="text-3xl font-extrabold uppercase mb-2 text-deep-teal">DEFEND</h3>
+              <p class="font-bold uppercase text-lg text-slate-ink mb-4">The ultimate stand. Students explain what they accepted, what they rejected, what they revised, and why. Human authorship. Human accountability.</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">I accepted ___ because ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">I rejected ___ because ___.</div>
+                <div class="bg-cream border-2 border-slate-ink p-3 font-bold uppercase">I revised ___ because ___.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supplementary resource — full student artifact -->
+      <div class="bg-slate-ink text-cream p-5 md:p-6 border-t-6 border-slate-ink flex flex-col md:flex-row md:items-center gap-4">
+        <div class="flex items-center gap-4 flex-1 min-w-0">
+          <span class="material-symbols-outlined text-warm-gold text-4xl shrink-0" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+          <div class="min-w-0">
+            <div class="text-[10px] font-black uppercase tracking-widest text-warm-gold">[ FIELD_ARTIFACT · POST_SESSION_REFERENCE ]</div>
+            <p class="mt-1 font-extrabold uppercase text-base md:text-lg leading-tight">Sample student 3D documentation — full record.</p>
+            <p class="mt-1 text-xs font-bold uppercase tracking-wide text-cream/70 leading-snug">A complete Document · Discern · Defend record from one of Kelly's students. Not required reading — included so you can see what the protocol looks like in the wild.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <a href="resources/HC-21-Student-Document-Discern-Defend.pdf" target="_blank" rel="noopener" class="bg-warm-gold text-slate-ink border-3 border-cream brutal-shadow-sm px-4 py-2 hover:bg-cream transition-colors flex items-center gap-2 font-black uppercase text-xs tracking-widest">
+            <span class="material-symbols-outlined text-base leading-none">open_in_new</span>
+            VIEW_PDF
+          </a>
+          <a href="resources/HC-21-Student-Document-Discern-Defend.pdf" download class="bg-cream text-slate-ink border-3 border-cream brutal-shadow-sm px-4 py-2 hover:bg-warm-gold transition-colors flex items-center gap-2 font-black uppercase text-xs tracking-widest">
+            <span class="material-symbols-outlined text-base leading-none">download</span>
+            DOWNLOAD
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HANDS-ON -->
+    <section id="handson">
+      <div class="bg-warm-gold p-4 inline-block mb-8 transform -rotate-2 brutal-shadow-sm">
+        <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-slate-ink">HANDS-ON / ALIGNMENT_CHECK</h2>
+      </div>
+
+      <!-- Mission briefing -->
+      <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 md:p-8 mb-8">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="bg-slate-ink text-warm-gold font-black text-xs uppercase px-3 py-1 border-3 border-slate-ink tracking-widest">MISSION</span>
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">[ STUDENT_RESEARCH_PROCESS_AUDIT ]</span>
+        </div>
+        <p class="text-sm md:text-base font-bold uppercase leading-snug">
+          → You'll work in a <span class="bg-warm-gold px-1 text-slate-ink">demo notebook</span> from one of Kelly's actual students. It contains three real artifacts from their research process. Run the same alignment check prompt the students ran. Think like the student — checking your own work before submitting.
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-ink text-cream p-4 border-3 border-slate-ink brutal-shadow-sm">
+            <div class="text-warm-gold font-black text-xs uppercase">STEP_01 · 2min</div>
+            <div class="mt-2 font-bold uppercase text-sm leading-snug">Open the demo notebook. Skim the three source documents.</div>
+          </div>
+          <div class="bg-slate-ink text-cream p-4 border-3 border-slate-ink brutal-shadow-sm">
+            <div class="text-warm-gold font-black text-xs uppercase">STEP_02 · 5min</div>
+            <div class="mt-2 font-bold uppercase text-sm leading-snug">Paste the alignment check prompt. Run it. Read the AI response carefully.</div>
+          </div>
+          <div class="bg-slate-ink text-cream p-4 border-3 border-slate-ink brutal-shadow-sm">
+            <div class="text-warm-gold font-black text-xs uppercase">STEP_03 · 4min</div>
+            <div class="mt-2 font-bold uppercase text-sm leading-snug">Reflect on what you accepted, rejected, and revised — and why.</div>
+          </div>
+        </div>
+
+        <!-- Launch button -->
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <a href="https://notebooklm.google.com/notebook/6db8e3ca-9646-4961-b5be-5c2159d9db0b?authuser=1" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-warm-gold border-3 border-slate-ink brutal-shadow px-5 py-3 hover:bg-deep-teal hover:text-cream transition-colors text-slate-ink">
+            <span class="material-symbols-outlined text-2xl">rocket_launch</span>
+            <span class="font-black uppercase tracking-widest text-sm">LAUNCH_DEMO_NOTEBOOK</span>
+            <span class="material-symbols-outlined text-base">open_in_new</span>
+          </a>
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">OPENS_NOTEBOOKLM · KELLY'S_STUDENT_SAMPLE</span>
+        </div>
+      </div>
+
+      <!-- Three source documents in the notebook -->
+      <div class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">[ NOTEBOOK_CONTENTS · 03_SOURCE_DOCS ]</span>
+          <span class="flex-1 h-[3px] bg-slate-ink"></span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <article class="bg-cream border-6 border-slate-ink brutal-shadow overflow-hidden">
+            <div class="bg-warm-gold border-b-6 border-slate-ink p-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink">[ DOC_01 · VISUAL ]</span>
+                <span class="material-symbols-outlined text-slate-ink">draw</span>
+              </div>
+              <h3 class="text-xl font-extrabold uppercase tracking-tight text-slate-ink leading-tight">Sketchnotes</h3>
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-bold uppercase leading-snug text-slate-ink">Visual research notes. Concepts and connections mapped by hand — arrows, clusters, conceptual links.</p>
+              <div class="mt-4 text-[10px] font-black uppercase tracking-widest text-deep-teal">→ THE_RAW_THINKING</div>
+            </div>
+          </article>
+
+          <article class="bg-cream border-6 border-slate-ink brutal-shadow overflow-hidden">
+            <div class="bg-muted-rose text-cream border-b-6 border-slate-ink p-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-black uppercase tracking-widest text-warm-gold">[ DOC_02 · PROSE ]</span>
+                <span class="material-symbols-outlined text-cream">bolt</span>
+              </div>
+              <h3 class="text-xl font-extrabold uppercase tracking-tight text-cream leading-tight">Flash Draft</h3>
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-bold uppercase leading-snug text-slate-ink">A "brain dump" free-write where the student synthesized research quickly — voice, passion, and core argument intact.</p>
+              <div class="mt-4 text-[10px] font-black uppercase tracking-widest text-muted-rose">→ THE_VOICE_&amp;_THESIS</div>
+            </div>
+          </article>
+
+          <article class="bg-cream border-6 border-slate-ink brutal-shadow overflow-hidden">
+            <div class="bg-deep-teal text-cream border-b-6 border-slate-ink p-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-black uppercase tracking-widest text-warm-gold">[ DOC_03 · STRUCTURE ]</span>
+                <span class="material-symbols-outlined text-cream">format_list_numbered</span>
+              </div>
+              <h3 class="text-xl font-extrabold uppercase tracking-tight text-cream leading-tight">Preliminary Outline</h3>
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-bold uppercase leading-snug text-slate-ink">The structured plan for the final research paper. Where the visual and the voice translate into a linear scaffold.</p>
+              <div class="mt-4 text-[10px] font-black uppercase tracking-widest text-deep-teal">→ THE_FORMAL_PLAN</div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Translation arrow visual -->
+        <div class="mt-4 grid grid-cols-3 items-center gap-6 px-6">
+          <div class="text-center text-[9px] font-black uppercase tracking-widest text-slate-ink/60">VISUAL → PROSE</div>
+          <div class="text-center text-[9px] font-black uppercase tracking-widest text-slate-ink/60">PROSE → STRUCTURE</div>
+          <div class="text-center text-[9px] font-black uppercase tracking-widest text-warm-gold">ALIGNMENT_CHECK ↻</div>
+        </div>
+      </div>
+
+      <!-- The alignment check prompt -->
+      <div class="bg-slate-ink text-cream border-6 border-slate-ink brutal-shadow overflow-hidden">
+        <div class="bg-warm-gold text-slate-ink px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-b-6 border-slate-ink">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined">terminal</span>
+            <span class="font-black uppercase tracking-widest text-xs">[ ALIGNMENT_CHECK_PROMPT / PASTE_INTO_NOTEBOOKLM ]</span>
+          </div>
+          <button onclick="copyPre(this)" class="bg-slate-ink text-warm-gold border-2 border-slate-ink px-3 py-1 hover:bg-cream hover:text-slate-ink transition-colors font-black uppercase text-xs tracking-widest">COPY ⧉</button>
+        </div>
+<pre class="p-5 md:p-6 text-[11px] md:text-[13px] leading-relaxed whitespace-pre-wrap font-mono">Role: Act as an expert Research Writing Coach and Editor.
+
+Context: I have uploaded three documents representing different stages of my research process:
+  • Sketchnotes: My visual research notes where I mapped out concepts and connections.
+  • Flash Draft: A "brain dump" or free-write where I synthesized my research quickly.
+  • Preliminary Outline: The structured plan for my final research paper.
+
+Task: Please "crosswalk" (cross-reference) these three sources to evaluate the quality and completeness of my Preliminary Outline. I need you to identify what has been lost or gained in the translation from visual notes to rough text to structure.
+
+Please analyze the sources and provide feedback in the following format:
+
+1. The "Lost Connections" Check
+   Look at the Sketchnotes. Are there complex relationships, arrows, or conceptual links drawn there that appeared in the Flash Draft but are missing from the Preliminary Outline?
+   Goal: Ensure the nuance of my visual mapping isn't lost in the linear structure of the outline.
+
+2. Argument Alignment
+   Compare the Flash Draft to the Preliminary Outline. Does the outline preserve the strongest voice and central argument found in the flash draft, or has the focus shifted?
+   Goal: Ensure the passion or core thesis of the "brain dump" is preserved in the formal structure.
+
+3. Gap Analysis
+   Identify any key themes or evidence present in the Sketchnotes or Flash Draft that are completely absent from the Preliminary Outline.
+   Goal: Make sure I haven't accidentally discarded important research.
+
+4. Structural Recommendations
+   Based on the cross-reference, provide 3-5 specific, actionable steps to improve the Preliminary Outline. (e.g., "Add a subsection in Part II to address the connection between X and Y found in your Sketchnotes.")</pre>
+      </div>
+
+      <!-- FIELD LOGS removed per request -->
+    </section>
+
+    <!-- DEBRIEF & TRANSFER -->
+    <section id="debrief" data-screen-label="Debrief & Transfer">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <div class="bg-muted-rose p-4 inline-block transform -rotate-1 brutal-shadow-sm border-3 border-slate-ink">
+          <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-cream">DEBRIEF &amp; TRANSFER</h2>
+        </div>
+        <div class="bg-cream border-3 border-slate-ink px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-ink/70">
+          [ STEP_04 · REFLECT_+_PORT ]
+        </div>
+      </div>
+
+      <p class="text-sm md:text-base font-bold uppercase leading-snug text-slate-ink/80 max-w-3xl mb-8">
+        What was useful? Where did human judgment matter? How does this scale across grade bands? Use these four questions to interrogate the AI response from the Hands-On block — then carry the moves home.
+      </p>
+
+      <!-- Reflection questions mapped to the prompt's 4 sections -->
+      <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">[ DEBRIEF · 04_QUESTIONS_FOR_THE_AI_RESPONSE ]</span>
+          <span class="flex-1 h-[3px] bg-slate-ink"></span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="q-card bg-cream border-3 border-slate-ink p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-slate-ink text-warm-gold font-black text-[10px] uppercase px-2 py-0.5 tracking-widest">Q1 · LOST_CONNECTIONS</span>
+            </div>
+            <span class="font-bold uppercase text-sm">What complex relationships from the Sketchnotes did the AI flag as missing from the outline? Do you agree?</span>
+          </div>
+          <div class="q-card bg-cream border-3 border-slate-ink p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-slate-ink text-warm-gold font-black text-[10px] uppercase px-2 py-0.5 tracking-widest">Q2 · ARGUMENT_ALIGNMENT</span>
+            </div>
+            <span class="font-bold uppercase text-sm">Where did the AI say the outline preserved the Flash Draft's voice — and where did the focus shift?</span>
+          </div>
+          <div class="q-card bg-cream border-3 border-slate-ink p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-slate-ink text-warm-gold font-black text-[10px] uppercase px-2 py-0.5 tracking-widest">Q3 · GAP_ANALYSIS</span>
+            </div>
+            <span class="font-bold uppercase text-sm">Which themes or pieces of evidence got discarded in translation? What would you fight to bring back?</span>
+          </div>
+          <div class="q-card bg-cream border-3 border-slate-ink p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-slate-ink text-warm-gold font-black text-[10px] uppercase px-2 py-0.5 tracking-widest">Q4 · ACCEPT_/_REJECT_/_REVISE</span>
+            </div>
+            <span class="font-bold uppercase text-sm">Of the AI's 3–5 structural recommendations, which would you accept, reject, or revise — and why?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade-band suggestions (subtle subsection of Debrief & Transfer) -->
+      <div class="mt-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">[ TRANSFER · GRADE-BAND_SUGGESTIONS ]</span>
+          <span class="flex-1 h-[3px] bg-slate-ink"></span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 floating-card">
+            <div class="text-xs font-black opacity-50 text-deep-teal">[ BAND_01 ]</div>
+            <h3 class="text-2xl font-extrabold uppercase mt-1 text-deep-teal">Upper Elementary</h3>
+            <ul class="mt-3 space-y-2 text-xs font-bold uppercase">
+              <li>→ Guided inquiry from teacher-curated sources</li>
+              <li>→ Note organization — AI sorts facts under headings</li>
+              <li>→ Claim-evidence checks on short sources</li>
+            </ul>
+          </div>
+          <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 floating-card">
+            <div class="text-xs font-black opacity-50 text-deep-teal">[ BAND_02 ]</div>
+            <h3 class="text-2xl font-extrabold uppercase mt-1 text-deep-teal">Middle School</h3>
+            <ul class="mt-3 space-y-2 text-xs font-bold uppercase">
+              <li>→ Source comparison across 2–3 short articles</li>
+              <li>→ Paragraph-to-outline alignment on 1-page drafts</li>
+              <li>→ Revision reflection — what changed and why</li>
+            </ul>
+          </div>
+          <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 floating-card">
+            <div class="text-xs font-black opacity-50 text-deep-teal">[ BAND_03 ]</div>
+            <h3 class="text-2xl font-extrabold uppercase mt-1 text-deep-teal">High School</h3>
+            <ul class="mt-3 space-y-2 text-xs font-bold uppercase">
+              <li>→ Full research notebooks with documented prompts</li>
+              <li>→ Peer review crosswalks on argumentative drafts</li>
+              <li>→ Argument audits — claims, warrants, evidence</li>
+            </ul>
+          </div>
+          <div class="bg-cream border-6 border-slate-ink brutal-shadow p-6 floating-card">
+            <div class="text-xs font-black opacity-50 text-deep-teal">[ BAND_04 ]</div>
+            <h3 class="text-2xl font-extrabold uppercase mt-1 text-deep-teal">Coaches &amp; Admin</h3>
+            <ul class="mt-3 space-y-2 text-xs font-bold uppercase">
+              <li>→ Adopt 3D as department protocol</li>
+              <li>→ Design PD around instructional model, not tool</li>
+              <li>→ Rubric language that rewards process visibility</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADAPTATIONS folded into Debrief & Transfer section above -->
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="lg:col-span-4 space-y-12">
+
+    <aside class="bg-cream border-3 border-slate-ink brutal-shadow p-6 transform rotate-1">
+      <h3 class="text-xl font-black uppercase border-b-3 border-slate-ink mb-6 pb-2 text-deep-teal">FACILITATORS</h3>
+      <div class="space-y-8">
+        <div class="flex gap-4">
+          <div class="w-20 h-20 border-3 border-slate-ink shrink-0 bg-warm-gold grid place-items-center font-black text-2xl text-slate-ink">KS</div>
+          <div>
+            <a href="mailto:stokoek@fpsct.org" class="group inline-flex items-center gap-1 hover:text-deep-teal transition-colors">
+              <h4 class="font-black uppercase text-sm text-slate-ink group-hover:underline group-hover:text-deep-teal">KELLY STOKOE</h4>
+              <span class="material-symbols-outlined text-sm text-slate-ink/40 group-hover:text-deep-teal">mail</span>
+            </a>
+            <p class="text-xs font-bold mt-1 opacity-70 text-deep-teal">CAPSTONE_TEACHER // ILLT_DEPT_LEADER</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-20 h-20 border-3 border-slate-ink shrink-0 bg-deep-teal grid place-items-center font-black text-2xl text-cream">AM</div>
+          <div>
+            <a href="mailto:marshalla@fpsct.org" class="group inline-flex items-center gap-1 hover:text-deep-teal transition-colors">
+              <h4 class="font-black uppercase text-sm text-slate-ink group-hover:underline group-hover:text-deep-teal">ANDY MARSHALL</h4>
+              <span class="material-symbols-outlined text-sm text-slate-ink/40 group-hover:text-deep-teal">mail</span>
+            </a>
+            <p class="text-xs font-bold mt-1 opacity-70 text-deep-teal">INSTRUCTIONAL_TECH_SPECIALIST</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-20 h-20 border-3 border-slate-ink shrink-0 bg-muted-rose grid place-items-center font-black text-2xl text-cream">TN</div>
+          <div>
+            <a href="mailto:nevillet@fpsct.org" class="group inline-flex items-center gap-1 hover:text-deep-teal transition-colors">
+              <h4 class="font-black uppercase text-sm text-slate-ink group-hover:underline group-hover:text-deep-teal">TJ NEVILLE</h4>
+              <span class="material-symbols-outlined text-sm text-slate-ink/40 group-hover:text-deep-teal">mail</span>
+            </a>
+            <p class="text-xs font-bold mt-1 opacity-70 text-deep-teal">INSTRUCTIONAL_TECH_SPECIALIST</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- NEXT STEPS -->
+<section id="next-steps" class="mt-32">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <div class="bg-deep-teal p-4 inline-block transform -rotate-1 brutal-shadow-sm border-3 border-slate-ink">
+      <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-cream">NEXT STEPS</h2>
+    </div>
+    <div class="bg-cream border-3 border-slate-ink px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-ink/70">
+      [ STEP_05 · CARRY_HOME ]
+    </div>
+  </div>
+  <p class="font-bold uppercase text-sm md:text-base max-w-2xl text-slate-ink leading-snug mb-10">
+    → Three pathways for self-paced exploration. No deadline. No deliverable. Pick one. Read one move at a time.
+  </p>
+
+  <!-- PATHWAY SELECTOR (compact, monochrome) -->
+  <div class="flex flex-wrap gap-0 border-3 border-slate-ink brutal-shadow mb-8 bg-slate-ink">
+    <button data-pathway="01" class="pathway-tab flex-1 min-w-[200px] p-5 text-left border-r-3 border-slate-ink bg-warm-gold transition-colors">
+      <div class="flex items-baseline gap-3">
+        <span class="font-black text-xs uppercase tracking-widest opacity-70">01</span>
+        <span class="font-extrabold text-lg md:text-xl uppercase tracking-tight">Continue</span>
+      </div>
+      <p class="mt-1 text-[11px] font-bold uppercase leading-snug opacity-80">Go deeper with what you started.</p>
+    </button>
+    <button data-pathway="02" class="pathway-tab flex-1 min-w-[200px] p-5 text-left border-r-3 border-slate-ink bg-cream transition-colors">
+      <div class="flex items-baseline gap-3">
+        <span class="font-black text-xs uppercase tracking-widest opacity-50">02</span>
+        <span class="font-extrabold text-lg md:text-xl uppercase tracking-tight">Pivot</span>
+      </div>
+      <p class="mt-1 text-[11px] font-bold uppercase leading-snug opacity-60">Try a different workflow or subject.</p>
+    </button>
+    <button data-pathway="03" class="pathway-tab flex-1 min-w-[200px] p-5 text-left bg-cream transition-colors">
+      <div class="flex items-baseline gap-3">
+        <span class="font-black text-xs uppercase tracking-widest opacity-50">03</span>
+        <span class="font-extrabold text-lg md:text-xl uppercase tracking-tight">Level Up</span>
+      </div>
+      <p class="mt-1 text-[11px] font-bold uppercase leading-snug opacity-60">Team · department · system.</p>
+    </button>
+  </div>
+
+  <!-- ACTIVE PATHWAY PANEL -->
+  <div class="bg-cream border-6 border-slate-ink brutal-shadow">
+    <!-- Pathway brief strip -->
+    <div class="bg-slate-ink text-cream p-6 md:p-8 border-b-6 border-slate-ink">
+      <div class="flex items-baseline gap-4 flex-wrap">
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-warm-gold" id="pathway-label">[ PATHWAY_01 · DEPTH ]</span>
+      </div>
+      <h3 class="mt-2 text-3xl md:text-4xl font-extrabold uppercase tracking-tighter" id="pathway-title">Continue</h3>
+      <p class="mt-3 text-xs md:text-sm font-bold uppercase leading-snug text-cream/80 italic max-w-2xl" id="pathway-subtitle">For participants who want to go deeper with what they started during the Alignment Check.</p>
+    </div>
+
+    <!-- Move selector -->
+    <div class="flex border-b-3 border-slate-ink">
+      <button data-move="A" class="move-tab flex-1 p-4 text-center border-r-3 border-slate-ink font-black uppercase text-sm bg-warm-gold transition-colors">Move A</button>
+      <button data-move="B" class="move-tab flex-1 p-4 text-center border-r-3 border-slate-ink font-black uppercase text-sm bg-cream hover:bg-warm-gold transition-colors">Move B</button>
+      <button data-move="C" class="move-tab flex-1 p-4 text-center font-black uppercase text-sm bg-cream hover:bg-warm-gold transition-colors">Move C</button>
+    </div>
+
+    <!-- Single move viewer -->
+    <div class="p-6 md:p-10">
+      <div class="mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-deep-teal" id="move-label">[ MOVE_A ]</div>
+      <h4 class="text-2xl md:text-3xl font-extrabold uppercase leading-tight text-deep-teal mb-3" id="move-title">Run an Alignment Check with your own materials</h4>
+      <p class="text-sm md:text-base font-bold uppercase leading-snug text-slate-ink mb-8 max-w-3xl" id="move-description">Use the same workflow with a student draft from a current unit — or one of your own documents. See what it surfaces when the content is real.</p>
+
+      <div class="bg-slate-ink text-cream p-5 md:p-6 border-3 border-slate-ink">
+        <div class="text-[10px] font-black uppercase tracking-widest text-warm-gold mb-3 flex justify-between items-center">
+          <span>[ GUIDE_ME_PROMPT / PASTE_READY ]</span>
+          <button id="move-copy-btn" class="text-cream hover:text-warm-gold transition-colors font-black">COPY ⧉</button>
+        </div>
+        <p class="text-xs md:text-sm leading-relaxed font-bold" id="move-prompt">I'm a [grade/subject] teacher. I want to use NotebookLM to audit a student draft against the approved outline for our [assignment name] assignment. Before we start, ask me 3 questions to understand the assignment, the outline structure, and what "drift" would look like for this task. Then help me write a targeted prompt I can paste into NotebookLM.</p>
+      </div>
+
+      <!-- Prev/Next -->
+      <div class="mt-8 flex justify-between items-center border-t-3 border-slate-ink pt-6">
+        <button id="move-prev" class="font-black text-xs uppercase tracking-widest text-slate-ink hover:text-muted-rose transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">chevron_left</span> Prev move
+        </button>
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-ink/60" id="move-counter">A / 3</span>
+        <button id="move-next" class="font-black text-xs uppercase tracking-widest text-slate-ink hover:text-muted-rose transition-colors flex items-center gap-2">
+          Next move <span class="material-symbols-outlined text-base">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pathway + move data -->
+  <script id="next-steps-data" type="application/json">
+  {
+    "01": {
+      "label": "[ PATHWAY_01 · DEPTH ]",
+      "title": "Continue",
+      "subtitle": "For participants who want to go deeper with what they started during the Alignment Check.",
+      "moves": [
+        {
+          "title": "Run an Alignment Check with your own materials",
+          "description": "Use the same workflow with a student draft from a current unit — or one of your own documents. See what it surfaces when the content is real.",
+          "prompt": "I'm a [grade/subject] teacher. I want to use NotebookLM to audit a student draft against the approved outline for our [assignment name] assignment. Before we start, ask me 3 questions to understand the assignment, the outline structure, and what \"drift\" would look like for this task. Then help me write a targeted prompt I can paste into NotebookLM."
+        },
+        {
+          "title": "Design the student reflection piece",
+          "description": "Build a short Document · Discern · Defend reflection template your students would actually complete. Draft the stems and the format.",
+          "prompt": "I'm a [grade/subject] teacher. I want to build a Document · Discern · Defend reflection template for students to complete after using AI on research work. Ask me about: the type of AI interactions students will log, the age and writing stamina of my students, and whether this should be a single form or repeated across a project. Then draft a template I can adapt."
+        },
+        {
+          "title": "Pressure-test the Alignment Check output",
+          "description": "Take the response NotebookLM gave you during the session and run a second pass — ask it to justify its claims or find what it missed.",
+          "prompt": "I used NotebookLM to compare a draft to an outline. Now I want to pressure-test what it told me — to see where its analysis was strong, weak, or wrong. Ask me what the AI claimed and what I noticed. Then help me write a follow-up prompt that asks NotebookLM to justify its specific claims and flag anything it might have missed."
+        }
+      ]
+    },
+    "02": {
+      "label": "[ PATHWAY_02 · BREADTH ]",
+      "title": "Pivot",
+      "subtitle": "For participants who want to try a different workflow, or translate the model to a new subject.",
+      "moves": [
+        {
+          "title": "Try Targeted Inquiry instead",
+          "description": "Explore the first workflow from the session — use NotebookLM to help students identify gaps in their source base and find what's missing.",
+          "prompt": "I'm a [grade/subject] teacher. I want students to use NotebookLM for Targeted Inquiry — to identify gaps in their current sources and find what's missing, rather than doing vague searching. Ask me about the research task, the sources students have already collected, and what \"missing\" means for this assignment. Then help me design the prompt students will use."
+        },
+        {
+          "title": "Try Peer Review Crosswalk instead",
+          "description": "Explore the third workflow — use NotebookLM to help students track whether revisions actually reflect peer feedback.",
+          "prompt": "I'm a [grade/subject] teacher. I want students to use NotebookLM for a Peer Review Crosswalk — to examine whether their revisions actually reflect the peer feedback they received. Ask me about my peer review process, the kinds of feedback students typically give each other, and how visible I want this to be for grading. Then help me write the prompt students will use."
+        },
+        {
+          "title": "Translate the model to a different subject",
+          "description": "Take Document · Discern · Defend out of research writing and into another context — lab reports, problem-solving, primary-source analysis, project design.",
+          "prompt": "I want to translate the Document · Discern · Defend protocol into a different subject area. Ask me what subject and grade I teach, what kind of student thinking I want to make visible, and what an AI interaction could look like in my context. Then help me design a subject-specific version of the protocol and a sample student-facing prompt."
+        }
+      ]
+    },
+    "03": {
+      "label": "[ PATHWAY_03 · SCALE ]",
+      "title": "Level Up",
+      "subtitle": "For participants ready to think about this at a team, department, or systems level.",
+      "moves": [
+        {
+          "title": "Build a department-level AI use protocol",
+          "description": "Adapt Document · Discern · Defend into a shared protocol for your team — with common language, common expectations, and a common reflection structure.",
+          "prompt": "I want to build a department-level AI use protocol using Document · Discern · Defend as the backbone. Ask me about my department (subject, grade band, number of teachers), where student AI use is already happening, and what tensions exist among colleagues about AI. Then help me draft a one-page protocol and a conversation guide for rolling it out with my team."
+        },
+        {
+          "title": "Design coaching moves for colleagues",
+          "description": "If you're a coach, TOSA, or admin — design the scaffolds, questions, and examples you'd use to help a colleague adopt one of these workflows in their practice.",
+          "prompt": "I'm an instructional coach (or admin / TOSA). I want to design coaching moves to help a colleague adopt one of the AI research workflows from this session. Ask me about my colleague's role, their current comfort with AI, and what I think their entry point should be. Then help me draft a short coaching sequence: opening question, demonstration move, and follow-up reflection."
+        },
+        {
+          "title": "Draft the assessment shift",
+          "description": "If students are documenting, discerning, and defending their AI use, how should that change what you grade and what counts as evidence of learning?",
+          "prompt": "I want to rethink assessment for a research assignment where students will use AI with the Document · Discern · Defend protocol. Ask me about: the current rubric, what I actually care about measuring, and whether the AI reflection should be part of the grade or separate from it. Then help me draft a revised rubric or assessment approach that treats student thinking as the thing being assessed."
+        }
+      ]
+    }
+  }
+  </script>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources" class="mt-32" data-screen-label="Resources">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <div class="bg-muted-rose p-4 inline-block transform -rotate-1 brutal-shadow-sm border-3 border-slate-ink">
+      <h2 class="text-4xl font-extrabold uppercase tracking-tighter text-cream">RESOURCES</h2>
+    </div>
+    <div class="bg-cream border-3 border-slate-ink px-3 py-2 text-[10px] font-black uppercase tracking-widest text-slate-ink/70">
+      [ STEP_06 · ARTIFACTS_+_DISTRICT ]
+    </div>
+  </div>
+  <p class="font-bold uppercase text-sm md:text-base max-w-3xl text-slate-ink leading-snug mb-10">
+    → Real materials from the example student's research project, plus the district AI policy framework that grounds the work.
+  </p>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- BLOCK 01 · STUDENT ARTIFACTS -->
+    <div class="bg-cream border-6 border-slate-ink brutal-shadow-lg overflow-hidden flex flex-col">
+      <div class="bg-warm-gold p-5 border-b-6 border-slate-ink flex items-center gap-3">
+        <span class="material-symbols-outlined text-3xl text-slate-ink" style="font-variation-settings: 'FILL' 1, 'wght' 700;">science</span>
+        <div>
+          <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/60">[ BLOCK_01 ]</div>
+          <h3 class="text-2xl font-extrabold uppercase tracking-tight text-slate-ink leading-none">Student Artifacts</h3>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col gap-4">
+        <p class="text-xs font-bold uppercase leading-snug text-slate-ink/70">
+          The actual deliverables produced by the example student during the research project. Open them to see the 3D protocol in motion.
+        </p>
+
+        <a href="resources/student-research-paper.pdf" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">description</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ ARTIFACT_01 · PDF ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">Research Paper Draft</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">The full draft of the student's research paper.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+
+        <a href="resources/student-infographic.png" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">image</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ ARTIFACT_02 · PNG ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">CCSU Presentation Infographic</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">AI-generated visual produced to support the student's presentation at Central Connecticut State University.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+
+        <a href="https://notebooklm.google.com/notebook/6db8e3ca-9646-4961-b5be-5c2159d9db0b?authuser=1" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">menu_book</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ ARTIFACT_03 · NOTEBOOKLM ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">NotebookLM Notebook</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">The live notebook used in the Hands-On block. Open the source documents and re-run the alignment check.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+
+        <a href="resources/student-3d-documentation.pdf" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">verified</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ ARTIFACT_04 · PDF ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">3D Documentation</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">Sample student DOCUMENT · DISCERN · DEFEND log — the full audit trail for this project.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- BLOCK 02 · DISTRICT RESOURCES -->
+    <div class="bg-cream border-6 border-slate-ink brutal-shadow-lg overflow-hidden flex flex-col">
+      <div class="bg-deep-teal p-5 border-b-6 border-slate-ink flex items-center gap-3 text-cream">
+        <span class="material-symbols-outlined text-3xl text-warm-gold" style="font-variation-settings: 'FILL' 1, 'wght' 700;">account_balance</span>
+        <div>
+          <div class="text-[10px] font-black uppercase tracking-widest text-cream/70">[ BLOCK_02 ]</div>
+          <h3 class="text-2xl font-extrabold uppercase tracking-tight leading-none">District Resources</h3>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col gap-4">
+        <p class="text-xs font-bold uppercase leading-snug text-slate-ink/70">
+          Farmington Public Schools' AI policy framework. The institutional ground that makes the 3D protocol official, not optional.
+        </p>
+
+        <a href="https://fpsct.org/district-departments/ai-in-fps/" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">domain</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ DISTRICT_01 · WEB ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">AI in FPS</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">The Artificial Intelligence section of the Farmington Public Schools Technology Services webpage.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+
+        <a href="https://docs.google.com/document/d/1ahW7O8_jYpgmDDvFXSx6mebckB_QNhxePJ5YolkkyTw/edit?tab=t.ff1c424pk0yy#heading=h.r0jyzhhvmnyx" target="_blank" rel="noopener" class="group block bg-cream border-3 border-slate-ink p-4 hover:bg-warm-gold transition-colors">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-4xl text-deep-teal shrink-0" style="font-variation-settings: 'FILL' 1, 'wght' 700;">menu_book</span>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-black uppercase tracking-widest text-slate-ink/50">[ DISTRICT_02 · GOOGLE_DOC ]</div>
+              <h4 class="font-extrabold uppercase text-base text-slate-ink leading-tight group-hover:underline">AI Use Guide</h4>
+              <p class="text-[11px] font-bold uppercase mt-1 text-slate-ink/70 leading-snug">Farmington Public Schools' Artificial Intelligence Use Guide — the working rules for staff and students.</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-ink shrink-0 group-hover:translate-x-1 transition-transform">arrow_outward</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mt-32 border-t-10 border-slate-ink pt-8 pb-16">
+  <div class="flex flex-wrap gap-12 justify-between items-end">
+    <div>
+      <p class="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none text-deep-teal">EDADVANCE</p>
+      <p class="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-none text-muted-rose mt-2">SPRING_AI_PD</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Copy-to-clipboard helpers
+  function copyText(btn) {
+    const container = btn.closest('div').parentElement;
+    const p = container.querySelector('p');
+    const text = p ? p.innerText.trim() : '';
+    if (text) {
+      navigator.clipboard.writeText(text);
+      const orig = btn.innerText;
+      btn.innerText = 'COPIED ✓';
+      setTimeout(() => { btn.innerText = orig; }, 1200);
+    }
+  }
+  function copyPre(btn) {
+    const pre = btn.closest('div').parentElement.querySelector('pre');
+    if (pre) {
+      navigator.clipboard.writeText(pre.innerText);
+      const orig = btn.innerText;
+      btn.innerText = 'COPIED ✓';
+      setTimeout(() => { btn.innerText = orig; }, 1200);
+    }
+  }
+
+  // Field Logs script removed
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' }); }
+    });
+  });
+
+  // Next Steps — simplified: single pathway + single move visible at a time
+  const nextStepsData = JSON.parse(document.getElementById('next-steps-data').textContent);
+  let currentPathway = '01';
+  let currentMoveIdx = 0;
+
+  const pathwayTabs = document.querySelectorAll('.pathway-tab');
+  const moveTabs = document.querySelectorAll('.move-tab');
+  const pathwayLabel = document.getElementById('pathway-label');
+  const pathwayTitle = document.getElementById('pathway-title');
+  const pathwaySubtitle = document.getElementById('pathway-subtitle');
+  const moveLabel = document.getElementById('move-label');
+  const moveTitle = document.getElementById('move-title');
+  const moveDescription = document.getElementById('move-description');
+  const movePrompt = document.getElementById('move-prompt');
+  const moveCounter = document.getElementById('move-counter');
+  const moveCopyBtn = document.getElementById('move-copy-btn');
+  const movePrev = document.getElementById('move-prev');
+  const moveNext = document.getElementById('move-next');
+
+  function render() {
+    const p = nextStepsData[currentPathway];
+    const m = p.moves[currentMoveIdx];
+    const letter = ['A', 'B', 'C'][currentMoveIdx];
+
+    pathwayLabel.textContent = p.label;
+    pathwayTitle.textContent = p.title;
+    pathwaySubtitle.textContent = p.subtitle;
+
+    moveLabel.textContent = `[ MOVE_${letter} ]`;
+    moveTitle.textContent = m.title;
+    moveDescription.textContent = m.description;
+    movePrompt.textContent = m.prompt;
+    moveCounter.textContent = `${letter} / 3`;
+
+    pathwayTabs.forEach(t => {
+      const active = t.dataset.pathway === currentPathway;
+      t.classList.toggle('bg-warm-gold', active);
+      t.classList.toggle('bg-cream', !active);
+      // dim label on inactive
+      const opacitySpans = t.querySelectorAll('.opacity-50, .opacity-70, .opacity-60, .opacity-80');
+      // no-op — handled via CSS classes already
+    });
+
+    moveTabs.forEach((t, i) => {
+      const active = i === currentMoveIdx;
+      t.classList.toggle('bg-warm-gold', active);
+      t.classList.toggle('bg-cream', !active);
+    });
+  }
+
+  pathwayTabs.forEach(t => {
+    t.addEventListener('click', () => {
+      currentPathway = t.dataset.pathway;
+      currentMoveIdx = 0;
+      render();
+    });
+  });
+  moveTabs.forEach((t, i) => {
+    t.addEventListener('click', () => {
+      currentMoveIdx = i;
+      render();
+    });
+  });
+  movePrev.addEventListener('click', () => {
+    currentMoveIdx = (currentMoveIdx + 2) % 3;
+    render();
+  });
+  moveNext.addEventListener('click', () => {
+    currentMoveIdx = (currentMoveIdx + 1) % 3;
+    render();
+  });
+  moveCopyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(movePrompt.innerText.trim());
+    const orig = moveCopyBtn.innerText;
+    moveCopyBtn.innerText = 'COPIED ✓';
+    setTimeout(() => { moveCopyBtn.innerText = orig; }, 1200);
+  });
+
+  render();
+
+  // ===== TWEAKS =====
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "hue": 0,
+    "colorCount": 3,
+    "texture": "none",
+    "shadowDepth": 8,
+    "typeVolume": "loud",
+    "cursor": "default",
+    "minimized": false
+  }/*EDITMODE-END*/;
+
+  // HSL for each accent in the original palette
+  const BASE_ACCENTS = {
+    'deep-teal':  { h: 193, s: 72, l: 21 }, // #0F4C5C
+    'warm-gold':  { h: 35,  s: 79, l: 57 }, // #E8A33D
+    'muted-rose': { h:   1, s: 52, l: 55 }  // #C85250
+  };
+  // Neutrals stay fixed
+  const NEUTRALS = {
+    'cream':     '#FBF7F0',
+    'slate-ink': '#1A2332'
+  };
+
+  function hslToHex(h, s, l) {
+    s /= 100; l /= 100;
+    const k = n => (n + h / 30) % 12;
+    const a = s * Math.min(l, 1 - l);
+    const f = n => {
+      const color = l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+      return Math.round(255 * color).toString(16).padStart(2, '0');
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
+
+  function applyTweaks(state) {
+    const hue = +state.hue || 0;
+    const count = +state.colorCount || 3;
+    const root = document.documentElement.style;
+
+    // primary (warm-gold) always active; secondary (deep-teal) at count>=2; tertiary (muted-rose) at count>=3
+    const primary = { ...BASE_ACCENTS['warm-gold'],  h: (BASE_ACCENTS['warm-gold'].h  + hue + 360) % 360 };
+    const secondary = { ...BASE_ACCENTS['deep-teal'],  h: (BASE_ACCENTS['deep-teal'].h  + hue + 360) % 360 };
+    const tertiary = { ...BASE_ACCENTS['muted-rose'], h: (BASE_ACCENTS['muted-rose'].h + hue + 360) % 360 };
+
+    const pHex = hslToHex(primary.h, primary.s, primary.l);
+    const sHex = count >= 2 ? hslToHex(secondary.h, secondary.s, secondary.l) : pHex;
+    const tHex = count >= 3 ? hslToHex(tertiary.h, tertiary.s, tertiary.l) : (count >= 2 ? sHex : pHex);
+
+    root.setProperty('--c-warm-gold', pHex);
+    root.setProperty('--c-deep-teal', sHex);
+    root.setProperty('--c-muted-rose', tHex);
+    root.setProperty('--c-cream', NEUTRALS['cream']);
+    root.setProperty('--c-slate-ink', NEUTRALS['slate-ink']);
+
+    // Update swatch in panel
+    const swatch = document.getElementById('tw-swatch');
+    if (swatch) {
+      const spans = swatch.querySelectorAll('span');
+      spans[0].style.background = pHex;
+      spans[1].style.background = sHex;
+      spans[2].style.background = tHex;
+      spans[1].style.opacity = count >= 2 ? '1' : '0.15';
+      spans[2].style.opacity = count >= 3 ? '1' : '0.15';
+    }
+
+    // Shadow depth
+    const depth = Math.max(0, Math.min(20, +state.shadowDepth ?? 8));
+    root.setProperty('--bs', depth + 'px');
+
+    // Texture / type volume / cursor — data attrs on <html>
+    document.documentElement.setAttribute('data-texture', state.texture || 'none');
+    document.documentElement.setAttribute('data-type', state.typeVolume || 'loud');
+    document.documentElement.setAttribute('data-cursor', state.cursor || 'crosshair');
+
+    // Readouts
+    const setText = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    setText('tw-hue-val',     hue + '°');
+    setText('tw-count-val',   count);
+    setText('tw-shadow-val',  depth + 'PX');
+    setText('tw-texture-val', (state.texture || 'none').toUpperCase());
+    setText('tw-type-val',    (state.typeVolume || 'loud').toUpperCase());
+    setText('tw-cursor-val',  ({ crosshair: 'CROSS', default: 'ARROW', cell: 'CELL' })[state.cursor] || 'CROSS');
+
+    // Segmented-button active states
+    const markActive = (selector, value) => {
+      document.querySelectorAll(selector).forEach(b => {
+        b.classList.toggle('active', b.dataset.val === String(value));
+      });
+    };
+    markActive('.tw-seg',    count);
+    markActive('.tw-tex',    state.texture || 'none');
+    markActive('.tw-type',   state.typeVolume || 'loud');
+    markActive('.tw-cursor', state.cursor || 'crosshair');
+  }
+
+  const tweakState = { ...TWEAK_DEFAULTS };
+  applyTweaks(tweakState);
+
+  // ---- Edit mode plumbing ----
+  const tweaksPanel = document.getElementById('tweaks-panel');
+  const expanded    = document.getElementById('tw-expanded');
+  const collapsed   = document.getElementById('tw-toggle-open');
+  const closeBtn    = document.getElementById('tw-toggle-close');
+
+  function setMinimized(v) {
+    tweakState.minimized = !!v;
+    expanded.classList.toggle('hidden', !!v);
+    collapsed.classList.toggle('hidden', !v);
+  }
+  setMinimized(tweakState.minimized);
+  closeBtn.addEventListener('click', () => { setMinimized(true); persist(); });
+  collapsed.addEventListener('click', () => { setMinimized(false); persist(); });
+
+  function persist() {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ...tweakState } }, '*');
+  }
+
+  // Hue slider
+  const hueInput = document.getElementById('tw-hue');
+  hueInput.value = tweakState.hue;
+  hueInput.addEventListener('input',  () => { tweakState.hue = +hueInput.value; applyTweaks(tweakState); });
+  hueInput.addEventListener('change', persist);
+
+  // Palette width segmented
+  document.querySelectorAll('.tw-seg').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tweakState.colorCount = +btn.dataset.val;
+      applyTweaks(tweakState);
+      persist();
+    });
+  });
+
+  // Texture segmented
+  document.querySelectorAll('.tw-tex').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tweakState.texture = btn.dataset.val;
+      applyTweaks(tweakState);
+      persist();
+    });
+  });
+
+  // Shadow slider
+  const shadowInput = document.getElementById('tw-shadow');
+  shadowInput.value = tweakState.shadowDepth;
+  shadowInput.addEventListener('input',  () => { tweakState.shadowDepth = +shadowInput.value; applyTweaks(tweakState); });
+  shadowInput.addEventListener('change', persist);
+
+  // Type volume segmented
+  document.querySelectorAll('.tw-type').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tweakState.typeVolume = btn.dataset.val;
+      applyTweaks(tweakState);
+      persist();
+    });
+  });
+
+  // Cursor segmented
+  document.querySelectorAll('.tw-cursor').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tweakState.cursor = btn.dataset.val;
+      applyTweaks(tweakState);
+      persist();
+    });
+  });
+
+  // Chaos — randomize
+  document.getElementById('tw-chaos').addEventListener('click', () => {
+    const textures = ['none','grid','dots','lines'];
+    const volumes  = ['quiet','loud','shout'];
+    const cursors  = ['crosshair','default','cell'];
+    Object.assign(tweakState, {
+      hue: Math.floor(Math.random() * 360),
+      colorCount: 1 + Math.floor(Math.random() * 3),
+      shadowDepth: Math.floor(Math.random() * 18) + 2,
+      texture:    textures[Math.floor(Math.random() * textures.length)],
+      typeVolume: volumes[Math.floor(Math.random() * volumes.length)],
+      cursor:     cursors[Math.floor(Math.random() * cursors.length)]
+    });
+    hueInput.value = tweakState.hue;
+    shadowInput.value = tweakState.shadowDepth;
+    applyTweaks(tweakState);
+    persist();
+  });
+
+  // Reset
+  document.getElementById('tw-reset').addEventListener('click', () => {
+    Object.assign(tweakState, {
+      hue: 0, colorCount: 3, shadowDepth: 8,
+      texture: 'none', typeVolume: 'loud', cursor: 'crosshair'
+    });
+    hueInput.value = tweakState.hue;
+    shadowInput.value = tweakState.shadowDepth;
+    applyTweaks(tweakState);
+    persist();
+  });
+
+  window.addEventListener('message', (e) => {
+    const msg = e.data || {};
+    if (msg.type === '__activate_edit_mode') tweaksPanel.classList.remove('hidden');
+    if (msg.type === '__deactivate_edit_mode') tweaksPanel.classList.add('hidden');
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+
+</body>
+</html>
